@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  小组件根布局。全部用框架控件并写死颜色/尺寸：RemoteViews 是被「宿主」（桌面）
+  用宿主自己的主题 inflate 的，任何依赖本应用主题属性的控件（Material 组件、
+  ?attr/colorPrimary 之类）在别的桌面上都可能 inflate 失败或走样。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widget_bg"
+    android:padding="8dp">
+
+    <!-- 头部兼「进配置页」的入口（见 RecordWidgetProvider.build）。单行，
+         高度可预期 —— TOOLBAR_DP 就是照它算的。 -->
+    <TextView
+        android:id="@+id/widget_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_loading"
+        android:textColor="#5B5B66"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <!-- 按钮行由 RecordWidgetProvider 用 addView 动态塞进来 -->
+    <LinearLayout
+        android:id="@+id/widget_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="vertical" />
+</LinearLayout>

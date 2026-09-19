@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 一个记录按钮。用 TextView + 背景 drawable，而不是 Button：Button 的背景
+     来自主题，在宿主桌面的主题下不保证存在（见 widget_record.xml 的注释）。
+
+     高度（paddingTop + 文字 + paddingBottom + marginBottom）要和
+     RecordWidgetProvider.BUTTON_ROW_DP 对得上 —— 那边靠它算小组件放得下几行。 -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/widget_button_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:textColor="#222222"
+    android:textSize="13sp" />

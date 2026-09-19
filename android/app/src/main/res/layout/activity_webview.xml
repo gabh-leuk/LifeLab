@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- WebView 直接当根：它就是整屏，外面再套一层 FrameLayout 只是白多一次布局。 -->
+<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/webView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

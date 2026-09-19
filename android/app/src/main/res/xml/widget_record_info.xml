@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  桌面小组件的声明。updatePeriodMillis 最小就是 30 分钟（系统会向上取整），
+  所以头部的「今日 N 条」最多滞后半小时 —— 用户点一下按钮时会立刻就地刷新。
+
+  尺寸：minWidth/minHeight = 110dp 即 2×2 格（Android 的换算约 `70×n − 30`）。
+  默认放上去就是 2×2，拖高会多出一行按钮（行数由 RecordWidgetProvider 按
+  宿主报的实际格高算，不是写死的）。resizeMode 两个方向都放开，minResize* 与
+  min* 相同，防止拖到比 2×2 更小。
+
+  configure：拖到桌面时先弹配置页勾选要放哪几个类型。**这一步是必经的** ——
+  系统只有在配置页回了 RESULT_OK 之后才会真正落下这个小组件，所以用户在那边
+  按返回键就等于不添加。widgetFeatures="reconfigurable"（API 28+）让支持的桌面
+  在长按菜单里也给一个「编辑」，与「点组件头部」是同一个页面。
+-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="com.lifelab.collector.WidgetConfigActivity"
+    android:description="@string/widget_description"
+    android:initialLayout="@layout/widget_record"
+    android:minHeight="110dp"
+    android:minResizeHeight="110dp"
+    android:minResizeWidth="110dp"
+    android:minWidth="110dp"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellHeight="2"
+    android:targetCellWidth="2"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen"
+    android:widgetFeatures="reconfigurable" />

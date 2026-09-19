@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.LifeLabCollector" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#222222</item>
+        <item name="colorPrimaryVariant">#222222</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#7D4FA8</item>
+    </style>
+</resources>

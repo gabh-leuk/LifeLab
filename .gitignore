@@ -1,0 +1,33 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# --- Env / secrets ---
+.env
+.env.local
+.env.*.local
+
+# --- DB (dev) ---
+*.db
+
+# --- Node ---
+node_modules/
+dist/
+*.tsbuildinfo
+
+# --- IDE ---
+.idea/
+.vscode/
+*.swp
+
+# --- 工具本地状态（含机器名/IP 等本机指纹，绝不入库）---
+.claude/
+
+# --- OS ---
+Thumbs.db
+.DS_Store

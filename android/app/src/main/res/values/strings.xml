@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LifeLab 采集</string>
+    <string name="grant_permission">授予「使用情况访问」权限</string>
+    <string name="hint_base_url">服务器地址，如 http://100.x.x.x:8000</string>
+    <string name="hint_token">设备 token（在后端创建设备时获得）</string>
+    <string name="save_config">保存配置</string>
+    <string name="upload_now">立即上传今日数据</string>
+    <string name="open_web">打开网页端（记录 / 统计 / 助手）</string>
+
+    <!-- 桌面小组件 -->
+    <string name="widget_label">LifeLab 记录</string>
+    <string name="widget_description">在桌面一键记录，顶部显示今天的条数与连续天数。</string>
+    <string name="widget_today_count">今日 %1$d 条</string>
+    <string name="widget_streak">连续 %1$d 天</string>
+    <string name="widget_loading">今日 —</string>
+    <string name="widget_offline">今日 —（连不上后端）</string>
+    <string name="widget_unconfigured">先打开 App 填服务器地址与 token</string>
+    <string name="widget_open_settings">打开设置</string>
+    <string name="widget_more">更多…</string>
+    <string name="toast_recorded">已记录：%1$s</string>
+    <string name="toast_record_failed">记录失败：%1$s</string>
+
+    <!-- 小组件配置页。按钮格子窄，进小组件的标签要短（widget_configure）。 -->
+    <string name="widget_configure">选类型</string>
+    <string name="widget_config_title">桌面按钮</string>
+    <string name="widget_config_hint">勾选想放在桌面上的记录类型。拖大组件能多放几个，多余的在「更多…」里。</string>
+    <string name="widget_config_hint_empty">一个都没勾，桌面上会只留一个「选类型」。再点组件头部随时能改。</string>
+    <string name="widget_config_loading">载入中…</string>
+    <string name="widget_config_failed">连不上后端，检查服务器地址与网络后再试。</string>
+    <string name="widget_config_retry">重试</string>
+    <string name="widget_config_need_setup">还没配置服务器地址与 token，读不到记录类型。</string>
+    <string name="widget_config_open_app">打开 App 去配置</string>
+    <string name="widget_config_cancel">取消</string>
+    <string name="widget_config_save">保存</string>
+</resources>

@@ -1,0 +1,59 @@
+name: CI
+
+# 公开仓库是本地 public 分支的单提交快照，只有 main 一条分支。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  backend:
+    name: backend · ruff + pytest
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      # 用 requirements.txt（意图：直接依赖 + 下界），不用 requirements.lock.txt ——
+      # 那份锁是 CPython 3.14.7/Windows 上 pip freeze 出来的，含 pywinpty，Linux 装不动。
+      # 代价是 CI 的版本组合可能与本地实测的漂移，换来的是它能在 Linux 上真的跑起来。
+      - run: pip install -r requirements.txt
+
+      - run: ruff check app tests scripts
+
+      # 测试全跑在 SQLite 上（函数级临时库），不需要 Postgres 服务。
+      # 注意：runner 上没有 backend/.env，settings 全部走默认值 —— 库默认是
+      # sqlite:///./lifelab.db。所以这里跑的并不是「本地那套」，而是**配置缺省**
+      # 的那套（首次 clone 的人也跑这套）。checkpointer 靠 is_postgres() 分流降级
+      # 到内存（app/agent/checkpointer.py），否则下面这条会吊满 30s 再超时。
+      # 想本地复现 CI：DATABASE_URL="sqlite:///./lifelab.db" pytest
+      # 仅 1 个 PG-only 用例会 skip。
+      - run: pytest -q
+
+  frontend:
+    name: frontend · tsc + vite build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+
+      # build = tsc && vite build —— 类型检查 + 打包一起过，前端没有单独的 lint 脚本
+      - run: npm run build

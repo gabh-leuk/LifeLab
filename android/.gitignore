@@ -1,0 +1,9 @@
+# --- Android ---
+.gradle/
+build/
+app/build/
+local.properties
+captures/
+.idea/
+*.iml
+.kotlin/

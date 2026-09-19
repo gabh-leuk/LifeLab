@@ -1,0 +1,32 @@
+# LifeLab 开发数据库
+# 使用：docker compose up -d   （需先安装 Docker Desktop）
+# 库口令从根目录 .env 的 LIFELAB_DB_PASSWORD 读；.env 被 .gitignore 覆盖。
+# 注意 POSTGRES_PASSWORD 只在**数据卷首次初始化**时生效 —— 库已存在时要改口令，
+# 必须 ALTER ROLE（见 docs/SETUP_ENV.md）。
+# 数据库：postgres 16 + pgvector（为以后 RAG 预留）
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: lifelab-db
+    # 默认策略是 no：Docker Desktop 起来了容器也停在 Exited，只能手动 up ——
+    # 重启机器后后端连不上库就是这么来的。unless-stopped 让它跟着 daemon 自动回来，
+    # 但你手动 stop 过的不会自作主张重启。
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lifelab
+      # 从根目录 .env 取（该文件被 .gitignore 覆盖，不进仓库）。
+      # `:?` 让变量缺失时 compose 直接报错退出，而不是悄悄起一个弱口令的库。
+      POSTGRES_PASSWORD: ${LIFELAB_DB_PASSWORD:?请在根目录 .env 里设置 LIFELAB_DB_PASSWORD}
+      POSTGRES_DB: lifelab
+    ports:
+      - "5432:5432"
+    volumes:
+      - lifelab_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lifelab"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  lifelab_pgdata:

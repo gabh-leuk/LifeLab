@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 简易烧瓶轮廓（正中安全区） -->
+    <path
+        android:fillColor="#C094E4"
+        android:pathData="M46,32h16v18l14,26a4,4 0 0 1 -4,6h-36a4,4 0 0 1 -4,-6l14,-26z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M45,32h18v4h-18z" />
+</vector>
